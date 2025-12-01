@@ -75,19 +75,27 @@ export function ShoppingListDisplay({
   let content: React.ReactNode = null;
 
   const filteredItems = useMemo(
-    () =>
-      listItems.filter((item) => {
+    () => {
+      const normalizedSearch = filter.nameSearch?.trim().toLowerCase();
+
+      return listItems.filter((item) => {
         if (!filter.showDone && item.done) {
           return false;
         }
-        if (filter.category === "Show All") {
-          return true;
+
+        if (filter.category && filter.category !== "Show All") {
+          if (item.category !== filter.category) {
+            return false;
+          }
         }
-        if (filter.category && item.category !== filter.category) {
-          return false;
+
+        if (normalizedSearch) {
+          return item.name.toLowerCase().includes(normalizedSearch);
         }
+
         return true;
-      }),
+      });
+    },
     [listItems, filter]
   );
 

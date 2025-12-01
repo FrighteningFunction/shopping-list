@@ -9,6 +9,7 @@ export interface ListItem {
 
 export interface ListFilter {
     showDone: boolean;
+    nameSearch?: string;
     category?: string;
 }
 

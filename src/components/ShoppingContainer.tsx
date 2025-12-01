@@ -52,35 +52,58 @@ function ShoppingListFilterPanel({
     [setFilter]
   );
   return (
-    <div className="mb-4">
-      <h4>Filter Options</h4>
-      <div className="form-check mb-3">
-        <input
-          type="checkbox"
-          id="showDoneCheckbox"
-          className="form-check-input me-2"
-          defaultChecked={true}
-          onChange={(e) =>
-            setFilter((prev) => ({
-              ...prev,
-              showDone: e.target.checked,
-            }))
-          }
-        />
-        <label htmlFor="showDoneCheckbox" className="form-check-label">
-          Show Done Items
-        </label>
+    <>
+      <h4 className="mb-4">Filter Options</h4>
+      <div className="row mb-4 align-items-center justify-content-start">
+        <div className="col-12 col-md-4 mb-3">
+          <div className="row">
+            <div className="col-6 col-md-10 d-flex align-items-center">
+              <i className="bi bi-search me-2"></i>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search by name..."
+                id="nameSearchInput"
+                onChange={(e) =>
+                  setFilter((prev) => ({
+                    ...prev,
+                    nameSearch: e.target.value,
+                  }))
+                }
+              />
+            </div>
+          </div>
+        </div>
+        <div className="col col-md-2">
+          <input
+            type="checkbox"
+            id="showDoneCheckbox"
+            className="form-check-input me-2"
+            defaultChecked={true}
+            onChange={(e) =>
+              setFilter((prev) => ({
+                ...prev,
+                showDone: e.target.checked,
+              }))
+            }
+          />
+          <label htmlFor="showDoneCheckbox" className="form-check-label">
+            Show Done Items
+          </label>
+        </div>
+        <div className="col col-md-2">
+          <div className="dropdown">
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Choose Category
+            </button>
+            <CategoriesDropDownMenu action={updateFilter} />
+          </div>
+        </div>
       </div>
-      <div className="dropdown">
-        <button
-          className="btn btn-secondary dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Choose Category
-        </button>
-        <CategoriesDropDownMenu action={updateFilter} />
-      </div>
-    </div>
+    </>
   );
 }
