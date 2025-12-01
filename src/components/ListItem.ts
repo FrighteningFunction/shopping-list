@@ -7,7 +7,12 @@ export interface ListItem {
     category?: string;
 }
 
-export const categories = ["Grocery", "Electronics", "Clothing", "Household", "Other"];
+export interface ListFilter {
+    showDone: boolean;
+    category?: string;
+}
+
+export const categories = ["Grocery", "Electronics", "Clothing", "Household", "Other", "Show All"];
 export type NewListItem = Omit<ListItem, "id" | "done"> & Partial<Pick<ListItem, "done">>;
 
 // Helper to read persisted data
