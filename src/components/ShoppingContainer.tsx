@@ -1,21 +1,28 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { ShoppingListDisplay } from "./ShoppingListDisplay";
 import { ShopppingItemForm } from "./ShoppingItemForm";
 import { useListItems } from "./ListItemsContext";
-import { categories, type ListFilter } from "./ListItem";
+import { type ListFilter, type ListItem } from "./ListItem";
 import { ListItemDetailViewer } from "./ListItemDetailViewer";
 import { CategoriesDropDownMenu } from "./CategoriesDropDownMenu";
 import { SearchBar } from "./SearchBar";
+import { CategoryFooter } from "./CategoryFooter";
 
 export function ShoppingContainer() {
   const [isAdding, setIsAdding] = React.useState(false);
-  const [isViewing, setIsViewing] = React.useState(false);
+  const [selectedItem, setSelectedItem] = React.useState<ListItem | null>(null);
   const [filter, setFilter] = React.useState<ListFilter>({
     showDone: true,
     category: undefined,
   });
 
   const { listItems } = useListItems();
+
+  useEffect(() => {
+    if (!selectedItem && listItems.length > 0) {
+      setSelectedItem(listItems[0]);
+    }
+  }, [listItems, selectedItem]);
 
   let addPanel: React.ReactNode = null;
 
@@ -37,9 +44,14 @@ export function ShoppingContainer() {
       <h1 className="mb-4">Shopping List</h1>
       <SearchBar setFilter={setFilter} />
       <ShoppingListFilterPanel setFilter={setFilter} />
-      <ShoppingListDisplay listItems={listItems} filter={filter} />
-      <ListItemDetailViewer listItem={listItems[0]} />
+      <ShoppingListDisplay
+        listItems={listItems}
+        filter={filter}
+        onSelectItem={setSelectedItem}
+      />
+      <ListItemDetailViewer listItem={selectedItem} />
       {addPanel}
+      <CategoryFooter />
     </div>
   );
 }

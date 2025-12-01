@@ -4,13 +4,13 @@ import { useListItems } from "./ListItemsContext";
 
 export function ListItemDetailViewer({
   listItem,
-}: Readonly<{ listItem: ListItem }>) {
+}: Readonly<{ listItem: ListItem | null }>) {
   const { updateItem } = useListItems();
 
-  const [name, setName] = React.useState<string>(listItem.name);
-  const [quantity, setQuantity] = React.useState<number>(listItem.quantity);
-  const [category, setCategory] = React.useState<string | undefined>(listItem.category);
-  const [note, setNote] = React.useState<string>(listItem.note);
+  const [name, setName] = React.useState<string>(listItem?.name ?? "");
+  const [quantity, setQuantity] = React.useState<number>(listItem?.quantity ?? 1);
+  const [category, setCategory] = React.useState<string | undefined>(listItem?.category);
+  const [note, setNote] = React.useState<string>(listItem?.note ?? "");
 
   const [nameEdit, setNameEdit] = React.useState<boolean>(false);
   const [quantityEdit, setQuantityEdit] = React.useState<boolean>(false);
@@ -18,6 +18,7 @@ export function ListItemDetailViewer({
   const [noteEdit, setNoteEdit] = React.useState<boolean>(false);
 
   useEffect(() => {
+    if (!listItem) return;
     setName(listItem.name);
     setQuantity(listItem.quantity);
     setCategory(listItem.category);
@@ -108,6 +109,7 @@ export function ListItemDetailViewer({
   }, [note, noteEdit]);
 
   const onSaveClick = () => {
+    if (!listItem) return;
     updateItem({
       ...listItem,
       name,
@@ -136,6 +138,10 @@ export function ListItemDetailViewer({
       </div>
       <div className="offcanvas-body">
         <p>Double click on a field to edit it!</p>
+        {!listItem ? (
+          <p className="text-muted">Select an item to view its details.</p>
+        ) : (
+          <>
         <div className="mb-3">
           <p className="mb-1 fw-semibold">Name</p>
           {nameField}
@@ -157,6 +163,8 @@ export function ListItemDetailViewer({
             Save Changes
           </button>
         </div>
+          </>
+        )}
       </div>
     </div>
   );

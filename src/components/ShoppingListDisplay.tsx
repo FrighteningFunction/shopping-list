@@ -2,7 +2,13 @@ import { useMemo } from "react";
 import { type ListFilter, type ListItem } from "./ListItem";
 import { useListItems } from "./ListItemsContext";
 
-function ShoppingListItem({ listItem }: Readonly<{ listItem: ListItem }>) {
+function ShoppingListItem({
+  listItem,
+  onSelect,
+}: Readonly<{
+  listItem: ListItem;
+  onSelect: (item: ListItem) => void;
+}>) {
   const { deleteItem, updateItem } = useListItems();
 
   const handleDelete = () => {
@@ -60,6 +66,7 @@ function ShoppingListItem({ listItem }: Readonly<{ listItem: ListItem }>) {
           href="#detailsViewer"
           role="button"
           aria-controls="detailsViewer"
+          onClick={() => onSelect(listItem)}
         >
           Details
         </a>
@@ -71,7 +78,12 @@ function ShoppingListItem({ listItem }: Readonly<{ listItem: ListItem }>) {
 export function ShoppingListDisplay({
   listItems,
   filter,
-}: Readonly<{ listItems: ListItem[]; filter: ListFilter }>) {
+  onSelectItem,
+}: Readonly<{
+  listItems: ListItem[];
+  filter: ListFilter;
+  onSelectItem: (item: ListItem) => void;
+}>) {
   let content: React.ReactNode = null;
 
   const filteredItems = useMemo(
@@ -107,7 +119,11 @@ export function ShoppingListDisplay({
     content = (
       <ul className="list-group">
         {filteredItems.map((item) => (
-          <ShoppingListItem key={item.id} listItem={item} />
+          <ShoppingListItem
+            key={item.id}
+            listItem={item}
+            onSelect={onSelectItem}
+          />
         ))}
       </ul>
     );
