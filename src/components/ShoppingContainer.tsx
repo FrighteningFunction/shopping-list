@@ -1,11 +1,14 @@
 import React from "react";
-import { getListItems } from "./ListItem";
 import { ShoppingListDisplay } from "./ShoppingListDisplay";
 import { ShopppingItemForm } from "./ShoppingItemForm";
+import { useListItems } from "./ListItemsContext";
 
 export function ShoppingContainer() {
 
     const [isAdding, setIsAdding] = React.useState(false);
+    const [isViewing, setIsViewing] = React.useState(false);
+
+    const {listItems} = useListItems();
 
     let addPanel : React.ReactNode = null;
 
@@ -22,7 +25,7 @@ export function ShoppingContainer() {
     return (
         <div className="container mt-4">
             <h1 className="mb-4">Shopping List</h1>
-            <ShoppingListDisplay listItems={getListItems()} />
+            <ShoppingListDisplay listItems={listItems} />
             {addPanel}
         </div>
     )

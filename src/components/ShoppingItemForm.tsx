@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addListItem } from "./ListItem";
+import { useListItems } from "./ListItemsContext";
 import "./shoppingitemform.css";
 
 export function ShopppingItemForm({
@@ -8,16 +8,15 @@ export function ShopppingItemForm({
   const [name, setName] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(1);
   const [note, setNote] = useState<string>("");
+  const { addItem } = useListItems();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // prevent page reload
 
-    const data = { name, quantity, note };
-
-    // Call your localStorage function
-    addListItem(name, quantity, note);
-
-    console.log("Saved data:", data);
+    addItem({ name, quantity, note });
+    setName("");
+    setQuantity(1);
+    setNote("");
     setIsAdding?.(false);
   };
 

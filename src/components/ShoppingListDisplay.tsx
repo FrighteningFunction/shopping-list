@@ -1,10 +1,22 @@
-import type { ListItem } from "./ListItem";
+import { type ListItem } from "./ListItem";
+import { useListItems } from "./ListItemsContext";
 
 function ShoppingListItem({ listItem }: Readonly<{ listItem: ListItem }>) {
+  const { deleteItem } = useListItems();
+
+  const handleDelete = () => {
+    deleteItem(listItem.id);
+  };
+
   return (
-    <div className="list-group-item d-flex justify-content-between align-items-center">
+    <li className="list-group-item d-flex justify-content-between align-items-center">
       <span>{listItem.name}</span>
-    </div>
+      <span >
+        <button className="btn btn-sm btn-outline-primary me-2">Details</button>
+        <button className="btn btn-sm btn-outline-danger" onClick={handleDelete}>
+          <i className="bi bi-trash me-1"></i>{"Delete"}</button>
+      </span>
+    </li>
   );
 }
 
@@ -19,11 +31,11 @@ export function ShoppingListDisplay({
     );
   } else {
     content = (
-      <div className="list-group">
+      <ul className="list-group">
         {listItems.map((item) => (
           <ShoppingListItem key={item.id} listItem={item} />
         ))}
-      </div>
+      </ul>
     );
   }
 
