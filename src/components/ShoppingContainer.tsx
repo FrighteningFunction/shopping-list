@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ShoppingListDisplay } from "./ShoppingListDisplay";
 import { ShopppingItemForm } from "./ShoppingItemForm";
 import { useListItems } from "./ListItemsContext";
 import { categories, type ListFilter } from "./ListItem";
+import { ListItemDetailViewer } from "./ListItemDetailViewer";
+import { CategoriesDropDownMenu } from "./CategoriesDropDownMenu";
 
 export function ShoppingContainer() {
   const [isAdding, setIsAdding] = React.useState(false);
@@ -34,6 +36,7 @@ export function ShoppingContainer() {
       <h1 className="mb-4">Shopping List</h1>
       <ShoppingListFilterPanel setFilter={setFilter} />
       <ShoppingListDisplay listItems={listItems} filter={filter} />
+      <ListItemDetailViewer listItem={listItems[0]} />
       {addPanel}
     </div>
   );
@@ -42,6 +45,12 @@ export function ShoppingContainer() {
 function ShoppingListFilterPanel({
   setFilter,
 }: Readonly<{ setFilter: React.Dispatch<React.SetStateAction<ListFilter>> }>) {
+  const updateFilter = useCallback(
+    (category: string) => {
+      setFilter((prev) => ({ ...prev, category }));
+    },
+    [setFilter]
+  );
   return (
     <div className="mb-4">
       <h4>Filter Options</h4>
@@ -63,29 +72,14 @@ function ShoppingListFilterPanel({
         </label>
       </div>
       <div className="dropdown">
-        <a
+        <button
           className="btn btn-secondary dropdown-toggle"
-          href="#"
-          role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Show category
-        </a>
-
-        <ul className="dropdown-menu">
-          {categories.map((category) => (
-            <li key={category}>
-              <button
-                className="dropdown-item"
-                type="button"
-                onClick={() => setFilter((prev) => ({ ...prev, category }))}
-              >
-                {category}
-              </button>
-            </li>
-          ))}
-        </ul>
+          Choose Category
+        </button>
+        <CategoriesDropDownMenu action={updateFilter} />
       </div>
     </div>
   );

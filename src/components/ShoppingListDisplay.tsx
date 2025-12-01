@@ -10,36 +10,59 @@ function ShoppingListItem({ listItem }: Readonly<{ listItem: ListItem }>) {
   };
 
   const handleDoneToggle = () => {
-  updateItem({
-    ...listItem,         
-    done: !listItem.done 
-  });
-};
+    updateItem({
+      ...listItem,
+      done: !listItem.done,
+    });
+  };
 
   let markDoneButton = null;
 
   if (listItem.done) {
     markDoneButton = (
-      <button className="btn btn-sm btn-outline-secondary mx-2" onClick={handleDoneToggle}>
+      <button
+        className="btn btn-sm btn-outline-secondary mx-2"
+        onClick={handleDoneToggle}
+      >
         Mark Undone
       </button>
     );
   } else {
     markDoneButton = (
-      <button className="btn btn-sm btn-outline-secondary mx-2" onClick={handleDoneToggle}>
+      <button
+        className="btn btn-sm btn-outline-secondary mx-2"
+        onClick={handleDoneToggle}
+      >
         Mark Done
       </button>
     );
   }
 
   return (
-    <li className={`list-group-item d-flex justify-content-between align-items-center ${listItem.done ? "list-group-item-secondary" : ""}`}>
+    <li
+      className={`list-group-item d-flex justify-content-between align-items-center ${
+        listItem.done ? "list-group-item-secondary" : ""
+      }`}
+    >
       <span>{listItem.name}</span>
-      <span >
-        <button className="btn btn-sm btn-outline-primary me-2">Details</button>
-        <button className="btn btn-sm btn-outline-danger" onClick={handleDelete}>
-          <i className="bi bi-trash me-1"></i>{"Delete"}</button>
+      <span>
+        <button
+          className="btn btn-sm btn-outline-danger"
+          onClick={handleDelete}
+        >
+          <i className="bi bi-trash me-1"></i>
+          {"Delete"}
+        </button>
         {markDoneButton}
+        <a
+          className="btn btn-outline-primary m-1"
+          data-bs-toggle="offcanvas"
+          href="#detailsViewer"
+          role="button"
+          aria-controls="detailsViewer"
+        >
+          Details
+        </a>
       </span>
     </li>
   );
@@ -51,18 +74,22 @@ export function ShoppingListDisplay({
 }: Readonly<{ listItems: ListItem[]; filter: ListFilter }>) {
   let content: React.ReactNode = null;
 
-  const filteredItems = useMemo(() => listItems.filter((item) => {
-    if (!filter.showDone && item.done) {
-      return false;
-    }
-    if (filter.category === "Show All") {
-      return true;
-    }
-    if (filter.category && item.category !== filter.category) {
-      return false;
-    }
-    return true;
-  }),[listItems, filter]);
+  const filteredItems = useMemo(
+    () =>
+      listItems.filter((item) => {
+        if (!filter.showDone && item.done) {
+          return false;
+        }
+        if (filter.category === "Show All") {
+          return true;
+        }
+        if (filter.category && item.category !== filter.category) {
+          return false;
+        }
+        return true;
+      }),
+    [listItems, filter]
+  );
 
   if (filteredItems.length === 0) {
     content = (
