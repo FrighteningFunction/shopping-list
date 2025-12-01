@@ -5,6 +5,7 @@ import { useListItems } from "./ListItemsContext";
 import { categories, type ListFilter } from "./ListItem";
 import { ListItemDetailViewer } from "./ListItemDetailViewer";
 import { CategoriesDropDownMenu } from "./CategoriesDropDownMenu";
+import { SearchBar } from "./SearchBar";
 
 export function ShoppingContainer() {
   const [isAdding, setIsAdding] = React.useState(false);
@@ -34,6 +35,7 @@ export function ShoppingContainer() {
   return (
     <div className="container mt-4">
       <h1 className="mb-4">Shopping List</h1>
+      <SearchBar setFilter={setFilter} />
       <ShoppingListFilterPanel setFilter={setFilter} />
       <ShoppingListDisplay listItems={listItems} filter={filter} />
       <ListItemDetailViewer listItem={listItems[0]} />
@@ -56,25 +58,6 @@ function ShoppingListFilterPanel({
       <h4 className="mb-4">Filter Options</h4>
       <div className="row mb-4 align-items-center justify-content-start">
         <div className="col-12 col-md-4 mb-3">
-          <div className="row">
-            <div className="col-6 col-md-10 d-flex align-items-center">
-              <i className="bi bi-search me-2"></i>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search by name..."
-                id="nameSearchInput"
-                onChange={(e) =>
-                  setFilter((prev) => ({
-                    ...prev,
-                    nameSearch: e.target.value,
-                  }))
-                }
-              />
-            </div>
-          </div>
-        </div>
-        <div className="col col-md-2">
           <input
             type="checkbox"
             id="showDoneCheckbox"
@@ -91,7 +74,7 @@ function ShoppingListFilterPanel({
             Show Done Items
           </label>
         </div>
-        <div className="col col-md-2">
+        <div className="col-12 col-md-2">
           <div className="dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"
