@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { categories, type ListItem } from "./ListItem";
 import { useListItems } from "./ListItemsContext";
+import { IconChooser } from "./iconChooser/iconChooser";
 
 export function ListItemDetailViewer({
   listItem,
@@ -8,11 +9,17 @@ export function ListItemDetailViewer({
   const { updateItem } = useListItems();
 
   const [name, setName] = React.useState<string>(listItem?.name ?? "");
-  const [quantity, setQuantity] = React.useState<number>(listItem?.quantity ?? 1);
-  const [category, setCategory] = React.useState<string | undefined>(listItem?.category);
+  const [icon, setIcon] = React.useState<string>(listItem?.icon ?? "");
+  const [quantity, setQuantity] = React.useState<number>(
+    listItem?.quantity ?? 1
+  );
+  const [category, setCategory] = React.useState<string | undefined>(
+    listItem?.category
+  );
   const [note, setNote] = React.useState<string>(listItem?.note ?? "");
 
   const [nameEdit, setNameEdit] = React.useState<boolean>(false);
+  const [iconEdit, setIconEdit] = React.useState<boolean>(false);
   const [quantityEdit, setQuantityEdit] = React.useState<boolean>(false);
   const [categoryEdit, setCategoryEdit] = React.useState<boolean>(false);
   const [noteEdit, setNoteEdit] = React.useState<boolean>(false);
@@ -20,6 +27,7 @@ export function ListItemDetailViewer({
   useEffect(() => {
     if (!listItem) return;
     setName(listItem.name);
+    setIcon(listItem.icon ?? "");
     setQuantity(listItem.quantity);
     setCategory(listItem.category);
     setNote(listItem.note);
@@ -44,6 +52,20 @@ export function ListItemDetailViewer({
       return <span onClick={() => setNameEdit(true)}>{name}</span>;
     }
   }, [name, nameEdit]);
+
+  const iconField = () => {
+    if (iconEdit) {
+      return (
+        <IconChooser setIsEditing={setIconEdit} setSelectedIcon={setIcon} />
+      );
+    } else {
+      return (
+        <button type="button" className="btn btn-light mb-2" onClick={() => setIconEdit(true)}>
+          {icon ? <i className={icon}></i> : "No icon yet, click to choose one"}
+        </button>
+      );
+    }
+  };
 
   const quantityField = useMemo(() => {
     if (quantityEdit) {
@@ -115,9 +137,10 @@ export function ListItemDetailViewer({
       name,
       quantity,
       category,
-      note
-    })
-  }
+      note,
+      icon,
+    });
+  };
 
   return (
     <div
@@ -142,27 +165,31 @@ export function ListItemDetailViewer({
           <p className="text-muted">Select an item to view its details.</p>
         ) : (
           <>
-        <div className="mb-3">
-          <p className="mb-1 fw-semibold">Name</p>
-          {nameField}
-        </div>
-        <div className="mb-3">
-          <p className="mb-1 fw-semibold">Quantity</p>
-          {quantityField}
-        </div>
-        <div className="mb-3">
-          <p className="mb-1 fw-semibold">Category</p>
-          {categoryField}
-        </div>
-        <div className="mb-3">
-          <p className="mb-1 fw-semibold">Note</p>
-          {noteField}
-        </div>
-        <div className="mt-3">
-          <button className="btn btn-primary" onClick={onSaveClick}>
-            Save Changes
-          </button>
-        </div>
+            <div className="mb-3">
+              <p className="mb-1 fw-semibold">Name</p>
+              {nameField}
+            </div>
+            <div className="mb-3">
+              <p className="mb-1 fw-semibold">Icon</p>
+              {iconField()}
+            </div>
+            <div className="mb-3">
+              <p className="mb-1 fw-semibold">Quantity</p>
+              {quantityField}
+            </div>
+            <div className="mb-3">
+              <p className="mb-1 fw-semibold">Category</p>
+              {categoryField}
+            </div>
+            <div className="mb-3">
+              <p className="mb-1 fw-semibold">Note</p>
+              {noteField}
+            </div>
+            <div className="mt-3">
+              <button className="btn btn-primary" onClick={onSaveClick}>
+                Save Changes
+              </button>
+            </div>
           </>
         )}
       </div>

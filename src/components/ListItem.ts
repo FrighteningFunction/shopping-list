@@ -5,6 +5,7 @@ export interface ListItem {
     note: string;
     done: boolean;
     category?: string;
+    icon?: string;
 }
 
 export interface ListFilter {

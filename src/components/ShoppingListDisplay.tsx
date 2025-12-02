@@ -51,9 +51,12 @@ function ShoppingListItem({
         listItem.done ? "list-group-item-secondary" : ""
       }`}
     >
-      <span>{listItem.name}</span>
+      <div className="d-flex flex-row align-items-center">
+        {listItem.icon && <i className={`${listItem.icon} fs-4 me-2`}></i>}
+        {listItem.name}
+      </div>
       <span>
-        <NoteDisplay listItem={listItem} />        
+        <NoteDisplay listItem={listItem} />
         <button
           className="btn btn-sm btn-outline-danger"
           onClick={handleDelete}
