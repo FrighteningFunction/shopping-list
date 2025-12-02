@@ -7,6 +7,7 @@ import { ListItemDetailViewer } from "./ListItemDetailViewer";
 import { CategoriesDropDownMenu } from "./CategoriesDropDownMenu";
 import { SearchBar } from "./SearchBar";
 import { CategoryFooter } from "./CategoryFooter";
+import * as bootstrap from "bootstrap";
 
 export function ShoppingContainer() {
   const [isAdding, setIsAdding] = React.useState(false);
@@ -18,11 +19,27 @@ export function ShoppingContainer() {
 
   const { listItems } = useListItems();
 
+  // Keep the selected item in sync with list updates
   useEffect(() => {
-    if (!selectedItem && listItems.length > 0) {
-      setSelectedItem(listItems[0]);
+    if (!selectedItem) {
+      if (listItems.length > 0) {
+        setSelectedItem(listItems[0]);
+      }
+      return;
     }
+
+    const updated = listItems.find((item) => item.id === selectedItem.id);
+    setSelectedItem(updated ?? null);
   }, [listItems, selectedItem]);
+
+  useEffect(() => {
+    const tooltipTriggerList = Array.from(
+      document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    );
+    tooltipTriggerList.forEach(
+      (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+    );
+  }, [listItems]);
 
   let addPanel: React.ReactNode = null;
 

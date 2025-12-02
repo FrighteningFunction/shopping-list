@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { type ListFilter, type ListItem } from "./ListItem";
 import { useListItems } from "./ListItemsContext";
+import { NoteDisplay } from "./NoteDisplay";
 
 function ShoppingListItem({
   listItem,
@@ -52,6 +53,7 @@ function ShoppingListItem({
     >
       <span>{listItem.name}</span>
       <span>
+        <NoteDisplay listItem={listItem} />        
         <button
           className="btn btn-sm btn-outline-danger"
           onClick={handleDelete}
@@ -60,16 +62,16 @@ function ShoppingListItem({
           {"Delete"}
         </button>
         {markDoneButton}
-        <a
+        <button
           className="btn btn-outline-primary m-1"
           data-bs-toggle="offcanvas"
-          href="#detailsViewer"
-          role="button"
+          data-bs-target="#detailsViewer"
+          type="button"
           aria-controls="detailsViewer"
           onClick={() => onSelect(listItem)}
         >
           Details
-        </a>
+        </button>
       </span>
     </li>
   );
@@ -86,30 +88,27 @@ export function ShoppingListDisplay({
 }>) {
   let content: React.ReactNode = null;
 
-  const filteredItems = useMemo(
-    () => {
-      const normalizedSearch = filter.nameSearch?.trim().toLowerCase();
+  const filteredItems = useMemo(() => {
+    const normalizedSearch = filter.nameSearch?.trim().toLowerCase();
 
-      return listItems.filter((item) => {
-        if (!filter.showDone && item.done) {
+    return listItems.filter((item) => {
+      if (!filter.showDone && item.done) {
+        return false;
+      }
+
+      if (filter.category && filter.category !== "Show All") {
+        if (item.category !== filter.category) {
           return false;
         }
+      }
 
-        if (filter.category && filter.category !== "Show All") {
-          if (item.category !== filter.category) {
-            return false;
-          }
-        }
+      if (normalizedSearch) {
+        return item.name.toLowerCase().includes(normalizedSearch);
+      }
 
-        if (normalizedSearch) {
-          return item.name.toLowerCase().includes(normalizedSearch);
-        }
-
-        return true;
-      });
-    },
-    [listItems, filter]
-  );
+      return true;
+    });
+  }, [listItems, filter]);
 
   if (filteredItems.length === 0) {
     content = (
