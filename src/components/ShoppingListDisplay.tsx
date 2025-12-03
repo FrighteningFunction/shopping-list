@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { type ListFilter, type ListItem } from "./ListItem";
-import { useListItems } from "./ListItemsContext";
+import { useListItems } from "../context/ListItemsContext";
 import { NoteDisplay } from "./NoteDisplay";
 import { useToasts } from "../toast/ToastContext";
 

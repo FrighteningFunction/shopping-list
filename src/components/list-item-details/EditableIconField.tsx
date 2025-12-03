@@ -1,5 +1,4 @@
-import React from "react";
-import { IconChooser } from "../iconchooser/IconChooser";
+import { IconChooser } from "../icon-chooser/IconChooser";
 
 type EditableIconFieldProps = {
   icon: string;
@@ -13,7 +12,7 @@ export function EditableIconField({
   setIcon,
   isEditing,
   setEditing,
-}: EditableIconFieldProps) {
+}: Readonly<EditableIconFieldProps>) {
   if (isEditing) {
     return (
       <IconChooser

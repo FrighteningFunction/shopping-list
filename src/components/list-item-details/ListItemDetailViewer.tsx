@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { categories, type ListItem } from "../ListItem";
-import { useListItems } from "../ListItemsContext";
+import { useListItems } from "../../context/ListItemsContext";
 import { useToasts } from "../../toast/ToastContext";
 import { EditableNameField } from "./EditableNameField";
 import { EditableNoteField } from "./EditableNoteField";

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 import { ShoppingListDisplay } from "./ShoppingListDisplay";
 import { ShopppingItemForm } from "./ShoppingItemForm";
-import { useListItems } from "./ListItemsContext";
+import { useListItems } from "../context/ListItemsContext";
 import { type ListFilter, type ListItem } from "./ListItem";
-import { ListItemDetailViewer } from "./listitemdetails/ListItemDetailViewer";
+import { ListItemDetailViewer } from "./list-item-details/ListItemDetailViewer";
 import { CategoriesDropDownMenu } from "./CategoriesDropDownMenu";
 import { SearchBar } from "./SearchBar";
 import { CategoryFooter } from "./CategoryFooter";

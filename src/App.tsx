@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ShoppingContainer } from "./components/ShoppingContainer";
-import { ListItemsProvider } from "./components/ListItemsContext";
+import { ListItemsProvider } from "./context/ListItemsContext";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ToastProvider } from "./toast/ToastContext";
 import { ToastContainer } from "./toast/ToastContainer";
