@@ -10,6 +10,9 @@ import { CategoryFooter } from "./CategoryFooter";
 import * as bootstrap from "bootstrap";
 import { WeatherBanner } from "./WeatherBanner";
 
+/**
+ * Top-level layout component that wires together filters, list display, detail viewer, and creation flow.
+ */
 export function ShoppingContainer() {
   const [isAdding, setIsAdding] = React.useState(false);
   const [selectedItem, setSelectedItem] = React.useState<ListItem | null>(null);

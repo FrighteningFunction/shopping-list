@@ -7,6 +7,15 @@ import { EditableNoteField } from "./EditableNoteField";
 import { EditableNumberField } from "./EditableNumberField";
 import { EditableIconField } from "./EditableIconField";
 
+/**
+ * Offcanvas panel for viewing and editing all fields of a selected list item.
+ * 
+ * Loads the item's current values into local state, allows inline editing of
+ * each field, and persists changes using the list item context. Fields switch
+ * between read-only and editable modes based on interaction.
+ *
+ * @param listItem - The item whose details are displayed and edited, or null if none is selected.
+ */
 export function ListItemDetailViewer({
   listItem,
 }: Readonly<{ listItem: ListItem | null }>) {

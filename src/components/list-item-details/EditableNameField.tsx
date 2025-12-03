@@ -6,6 +6,14 @@ type EditableNameFieldProps = {
   setEditing: (v: boolean) => void;
 };
 
+/**
+ * Inline editable text field for modifying the item's name.
+ *
+ * @param value - Current name value displayed in the field.
+ * @param setValue - Updates the parent's name state upon user input.
+ * @param isEditing - Whether the field is currently in editing mode.
+ * @param setEditing - Toggles editing mode on or off.
+ */
 export function EditableNameField({
   value,
   setValue,

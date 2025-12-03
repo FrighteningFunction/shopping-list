@@ -1,5 +1,12 @@
 import { icons } from "./icons";
 
+/**
+ * Displays a selectable grid of available icons and notifies the parent component
+ * when the user chooses one.
+ *
+ * @param setSelectedIcon - Callback invoked with the chosen icon's class name.
+ * @param setIsEditing - Callback to toggle editing mode in the parent component.
+ */
 export function IconChooser({
   setSelectedIcon,
   setIsEditing,

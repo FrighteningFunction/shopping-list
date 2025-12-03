@@ -1,5 +1,10 @@
 import { categories } from "./ListItem";
 
+/**
+ * Dropdown menu listing all available categories and invoking a callback when one is selected.
+ *
+ * @param action - Callback executed with the chosen category.
+ */
 export function CategoriesDropDownMenu({
   action,
 }: Readonly<{ action: (category: string) => void }>) {

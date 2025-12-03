@@ -1,5 +1,10 @@
 import type { ListFilter } from "./ListItem";
 
+/**
+ * Search input that updates the list filter by modifying the name-based search value.
+ *
+ * @param setFilter - Setter for updating the list filter state.
+ */
 export function SearchBar({
   setFilter,
 }: Readonly<{ setFilter: React.Dispatch<React.SetStateAction<ListFilter>> }>) {

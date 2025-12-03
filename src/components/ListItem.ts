@@ -17,7 +17,10 @@ export interface ListFilter {
 export const categories = ["Grocery", "Electronics", "Clothing", "Household", "Other", "Show All"];
 export type NewListItem = Omit<ListItem, "id" | "done"> & Partial<Pick<ListItem, "done">>;
 
-// Helper to read persisted data
+/**
+ * Reads persisted list items from local storage.
+ * @returns Parsed list item array or an empty array when not available.
+ */
 export function getListItems(): ListItem[] {
     const listitemsStr = localStorage.getItem("listitems");
     if (!listitemsStr) return [];
@@ -29,6 +32,10 @@ export function getListItems(): ListItem[] {
     }
 }
 
+/**
+ * Persists the list items array to local storage.
+ * @param listItems Items to serialize and store.
+ */
 export function saveListItems(listItems: ListItem[]): void {
     localStorage.setItem("listitems", JSON.stringify(listItems));
 }

@@ -7,6 +7,15 @@ type EditableIconFieldProps = {
   setEditing: (v: boolean) => void;
 };
 
+/**
+ * Renders an editable icon field that toggles between a read-only button
+ * showing the currently selected icon and an interactive icon chooser.
+ *
+ * @param icon - The currently selected icon's CSS class name.
+ * @param setIcon - Updates the parent's icon state when the user selects a new one.
+ * @param isEditing - Whether the field is currently in editing mode.
+ * @param setEditing - Toggles editing mode on or off.
+ */
 export function EditableIconField({
   icon,
   setIcon,

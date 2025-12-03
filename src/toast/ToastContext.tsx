@@ -20,6 +20,10 @@ type ToastContextValue = {
 
 const ToastContext = createContext<ToastContextValue | null>(null);
 
+/**
+ * Provides toast state and helper to enqueue toasts to descendant components.
+ * @param children React nodes that can consume the toast context.
+ */
 export function ToastProvider({ children }: { children: React.ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
   const nextIdRef = useRef(1);
@@ -55,6 +59,10 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * Accessor hook for the toast context.
+ * @throws If used outside of `ToastProvider`.
+ */
 export function useToasts() {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error("useToasts must be used inside ToastProvider");

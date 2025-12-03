@@ -83,6 +83,14 @@ function ShoppingListItem({
   );
 }
 
+/**
+ * Displays shopping list items filtered by name, category, and completion status,
+ * and renders list entries with controls for selecting an item.
+ *
+ * @param listItems - All items available for display.
+ * @param filter - Active filtering rules applied to the list.
+ * @param onSelectItem - Callback fired when the user selects an item from the list.
+ */
 export function ShoppingListDisplay({
   listItems,
   filter,

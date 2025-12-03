@@ -2,7 +2,9 @@ import React, { useMemo } from "react";
 import { categories } from "./ListItem";
 import { useListItems } from "../context/ListItemsContext";
 
-// Shows a quick count of items per category in a footer bar.
+/**
+ * Renders a footer with per-category counts derived from the list items context.
+ */
 export function CategoryFooter() {
   const { listItems } = useListItems();
 

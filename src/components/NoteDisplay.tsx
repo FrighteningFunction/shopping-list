@@ -1,5 +1,10 @@
 import type { ListItem } from "./ListItem";
 
+/**
+ * Displays a button that reveals the item's note in a Bootstrap tooltip, if the note exists.
+ *
+ * @param listItem - The item whose note is displayed on hover.
+ */
 export function NoteDisplay({ listItem }: { listItem: ListItem }) {
     return (
         listItem.note ? (

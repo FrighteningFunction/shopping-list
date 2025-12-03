@@ -1,5 +1,8 @@
 import { useToasts } from "./ToastContext";
 
+/**
+ * Displays active toast notifications from the toast context in a fixed container.
+ */
 export function ToastContainer() {
   const { toasts } = useToasts();
 

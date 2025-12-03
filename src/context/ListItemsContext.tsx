@@ -10,6 +10,10 @@ type ListItemsContextValue = {
 
 const ListItemsContext = createContext<ListItemsContextValue | null>(null);
 
+/**
+ * Provides list item state and CRUD helpers to descendent components.
+ * @param children React nodes that can consume the list items context.
+ */
 export function ListItemsProvider({ children }: { children: React.ReactNode }) {
   const [listItems, setListItems] = useState<ListItem[]>(() => getListItems());
   const nextIdRef = useRef(
@@ -62,6 +66,10 @@ export function ListItemsProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * Accessor hook for the list items context.
+ * @throws If used outside of `ListItemsProvider`.
+ */
 export function useListItems() {
   const ctx = useContext(ListItemsContext);
   if (!ctx) throw new Error("useListItems must be used inside ListItemsProvider");

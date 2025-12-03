@@ -1,5 +1,8 @@
-import React, { use, useCallback } from "react";
+import React, { useCallback } from "react";
 
+/**
+ * Fetches and displays the current temperature with periodic refreshes.
+ */
 export function WeatherBanner() {
   const [temp, setTemp] = React.useState<number | null>(null);
 

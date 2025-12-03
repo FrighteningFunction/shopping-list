@@ -3,6 +3,12 @@ import { useListItems } from "../context/ListItemsContext";
 import "./shoppingitemform.css";
 import { useToasts } from "../toast/ToastContext";
 
+/**
+ * Form for creating a new shopping list item, handling submission, validation,
+ * and closing of the add-item panel after completion.
+ *
+ * @param setIsAdding - Setter used to close the add-item panel.
+ */
 export function ShopppingItemForm({
   setIsAdding,
 }: Readonly<{ setIsAdding?: React.Dispatch<React.SetStateAction<boolean>> }>) {
