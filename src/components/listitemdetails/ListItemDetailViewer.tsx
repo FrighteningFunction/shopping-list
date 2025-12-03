@@ -1,8 +1,11 @@
 import React, { useEffect, useMemo } from "react";
-import { categories, type ListItem } from "./ListItem";
-import { useListItems } from "./ListItemsContext";
-import { IconChooser } from "./iconChooser/IconChooser";
-import { useToasts } from "../toast/ToastContext";
+import { categories, type ListItem } from "../ListItem";
+import { useListItems } from "../ListItemsContext";
+import { useToasts } from "../../toast/ToastContext";
+import { EditableNameField } from "./EditableNameField";
+import { EditableNoteField } from "./EditableNoteField";
+import { EditableNumberField } from "./EditableNumberField";
+import { EditableIconField } from "./EditableIconField";
 
 export function ListItemDetailViewer({
   listItem,
@@ -39,51 +42,6 @@ export function ListItemDetailViewer({
     setNoteEdit(false);
   }, [listItem]);
 
-  const nameField = useMemo(() => {
-    if (nameEdit) {
-      return (
-        <input
-          type="text"
-          className="form-control"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          onBlur={() => setNameEdit(false)}
-        />
-      );
-    } else {
-      return <span onClick={() => setNameEdit(true)}>{name}</span>;
-    }
-  }, [name, nameEdit]);
-
-  const iconField = () => {
-    if (iconEdit) {
-      return (
-        <IconChooser setIsEditing={setIconEdit} setSelectedIcon={setIcon} />
-      );
-    } else {
-      return (
-        <button type="button" className="btn btn-light mb-2" onClick={() => setIconEdit(true)}>
-          {icon ? <i className={icon}></i> : "No icon yet, click to choose one"}
-        </button>
-      );
-    }
-  };
-
-  const quantityField = useMemo(() => {
-    if (quantityEdit) {
-      return (
-        <input
-          type="number"
-          className="form-control"
-          value={quantity}
-          onChange={(e) => setQuantity(Number(e.target.value))}
-          onBlur={() => setQuantityEdit(false)}
-        />
-      );
-    }
-    return <span onClick={() => setQuantityEdit(true)}>{quantity}</span>;
-  }, [quantity, quantityEdit]);
-
   const categoryField = useMemo(() => {
     if (categoryEdit) {
       return (
@@ -111,26 +69,6 @@ export function ListItemDetailViewer({
       </span>
     );
   }, [category, categoryEdit]);
-
-  const noteField = useMemo(() => {
-    if (noteEdit) {
-      return (
-        <textarea
-          className="form-control"
-          value={note}
-          rows={3}
-          onChange={(e) => setNote(e.target.value)}
-          onBlur={() => setNoteEdit(false)}
-        />
-      );
-    }
-
-    return (
-      <span className="text-wrap" onClick={() => setNoteEdit(true)}>
-        {note || "Add a note"}
-      </span>
-    );
-  }, [note, noteEdit]);
 
   const onSaveClick = () => {
     if (!listItem) return;
@@ -170,15 +108,30 @@ export function ListItemDetailViewer({
           <>
             <div className="mb-3">
               <p className="mb-1 fw-semibold">Name</p>
-              {nameField}
+              <EditableNameField
+                value={name}
+                setValue={setName}
+                isEditing={nameEdit}
+                setEditing={setNameEdit}
+              />
             </div>
             <div className="mb-3">
               <p className="mb-1 fw-semibold">Icon</p>
-              {iconField()}
+              <EditableIconField
+                icon={icon}
+                setIcon={setIcon}
+                isEditing={iconEdit}
+                setEditing={setIconEdit}
+              />
             </div>
             <div className="mb-3">
               <p className="mb-1 fw-semibold">Quantity</p>
-              {quantityField}
+              <EditableNumberField
+                value={quantity}
+                setValue={setQuantity}
+                isEditing={quantityEdit}
+                setEditing={setQuantityEdit}
+              />
             </div>
             <div className="mb-3">
               <p className="mb-1 fw-semibold">Category</p>
@@ -186,7 +139,12 @@ export function ListItemDetailViewer({
             </div>
             <div className="mb-3">
               <p className="mb-1 fw-semibold">Note</p>
-              {noteField}
+              <EditableNoteField
+                value={note}
+                setValue={setNote}
+                isEditing={noteEdit}
+                setEditing={setNoteEdit}
+              />
             </div>
             <div className="mt-3">
               <button className="btn btn-primary" onClick={onSaveClick}>

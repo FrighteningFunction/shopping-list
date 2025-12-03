@@ -3,11 +3,12 @@ import { ShoppingListDisplay } from "./ShoppingListDisplay";
 import { ShopppingItemForm } from "./ShoppingItemForm";
 import { useListItems } from "./ListItemsContext";
 import { type ListFilter, type ListItem } from "./ListItem";
-import { ListItemDetailViewer } from "./ListItemDetailViewer";
+import { ListItemDetailViewer } from "./listitemdetails/ListItemDetailViewer";
 import { CategoriesDropDownMenu } from "./CategoriesDropDownMenu";
 import { SearchBar } from "./SearchBar";
 import { CategoryFooter } from "./CategoryFooter";
 import * as bootstrap from "bootstrap";
+import { WeatherBanner } from "./WeatherBanner";
 
 export function ShoppingContainer() {
   const [isAdding, setIsAdding] = React.useState(false);
@@ -58,7 +59,10 @@ export function ShoppingContainer() {
 
   return (
     <div className="container mt-4">
-      <h1 className="mb-4">Shopping List</h1>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="mb-4">Shopping List</h1>
+        <WeatherBanner />
+      </div>
       <SearchBar setFilter={setFilter} />
       <ShoppingListFilterPanel setFilter={setFilter} />
       <ShoppingListDisplay

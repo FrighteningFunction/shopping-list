@@ -5,7 +5,6 @@ export function SearchBar({
 }: Readonly<{ setFilter: React.Dispatch<React.SetStateAction<ListFilter>> }>) {
   return (
     <>
-      <h4 className="mb-4">Search</h4>
       <div className="row mb-4 align-items-center justify-content-start">
         <div className="col-12 col-md-6 mb-3 d-flex align-items-center">
           <i className="bi bi-search me-2"></i>
