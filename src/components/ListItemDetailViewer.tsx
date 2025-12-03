@@ -1,12 +1,14 @@
 import React, { useEffect, useMemo } from "react";
 import { categories, type ListItem } from "./ListItem";
 import { useListItems } from "./ListItemsContext";
-import { IconChooser } from "./iconChooser/iconChooser";
+import { IconChooser } from "./iconChooser/IconChooser";
+import { useToasts } from "../toast/ToastContext";
 
 export function ListItemDetailViewer({
   listItem,
 }: Readonly<{ listItem: ListItem | null }>) {
   const { updateItem } = useListItems();
+  const {addToast} = useToasts();
 
   const [name, setName] = React.useState<string>(listItem?.name ?? "");
   const [icon, setIcon] = React.useState<string>(listItem?.icon ?? "");
@@ -140,6 +142,7 @@ export function ListItemDetailViewer({
       note,
       icon,
     });
+    addToast("Item updated successfully!");
   };
 
   return (

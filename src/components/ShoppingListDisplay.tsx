@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { type ListFilter, type ListItem } from "./ListItem";
 import { useListItems } from "./ListItemsContext";
 import { NoteDisplay } from "./NoteDisplay";
+import { useToasts } from "../toast/ToastContext";
 
 function ShoppingListItem({
   listItem,
@@ -11,9 +12,11 @@ function ShoppingListItem({
   onSelect: (item: ListItem) => void;
 }>) {
   const { deleteItem, updateItem } = useListItems();
+  const { addToast } = useToasts();
 
   const handleDelete = () => {
     deleteItem(listItem.id);
+    addToast("Item deleted successfully!");
   };
 
   const handleDoneToggle = () => {

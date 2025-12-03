@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useListItems } from "./ListItemsContext";
 import "./shoppingitemform.css";
+import { useToasts } from "../toast/ToastContext";
 
 export function ShopppingItemForm({
   setIsAdding,
@@ -9,11 +10,13 @@ export function ShopppingItemForm({
   const [quantity, setQuantity] = useState<number>(1);
   const [note, setNote] = useState<string>("");
   const { addItem } = useListItems();
+  const { addToast } = useToasts();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // prevent page reload
 
     addItem({ name, quantity, note });
+    addToast("Item added successfully!");
     setName("");
     setQuantity(1);
     setNote("");
