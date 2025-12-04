@@ -34,7 +34,8 @@ function ShoppingListItem({
         className="btn btn-sm btn-outline-secondary mx-2"
         onClick={handleDoneToggle}
       >
-        Mark Undone
+        <i className="bi bi-arrow-counterclockwise me-1"></i>
+        {"Mark Undone"}
       </button>
     );
   } else {
@@ -43,7 +44,8 @@ function ShoppingListItem({
         className="btn btn-sm btn-outline-secondary mx-2"
         onClick={handleDoneToggle}
       >
-        Mark Done
+        <i className="bi bi-check-lg me-1"></i>
+        {"Mark Done"}
       </button>
     );
   }
@@ -76,7 +78,8 @@ function ShoppingListItem({
           aria-controls="detailsViewer"
           onClick={() => onSelect(listItem)}
         >
-          Details
+          <i className="bi bi-body-text me-1"></i>
+          {"Details"}
         </button>
       </span>
     </li>

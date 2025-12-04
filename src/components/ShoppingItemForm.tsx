@@ -85,14 +85,16 @@ export function ShopppingItemForm({
         <div className="row">
           <div className="col-md-6 mb-3">
             <button type="submit" className="btn btn-primary">
-              Submit
+              <i className="bi bi-plus-lg me-1"></i>
+              {"Add Item"}
             </button>
             <button
               type="button"
               className="btn btn-secondary ms-2"
               onClick={handleCancel}
             >
-              Cancel
+              <i className="bi bi-x-lg me-1"></i>
+              {"Cancel"}
             </button>
           </div>
         </div>

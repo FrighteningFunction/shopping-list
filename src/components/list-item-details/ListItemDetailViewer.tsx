@@ -100,7 +100,8 @@ export function ListItemDetailViewer({
     >
       <div className="offcanvas-header">
         <h5 className="offcanvas-title" id="detailsViewerLabel">
-          Todo Details
+          <i className="bi bi-card-list me-2"></i>
+          {"Todo Details"}
         </h5>
         <button
           type="button"
@@ -116,7 +117,10 @@ export function ListItemDetailViewer({
         ) : (
           <>
             <div className="mb-3">
-              <p className="mb-1 fw-semibold">Name</p>
+              <p className="mb-1 fw-semibold">
+                <i className="bi bi-card-text me-2"></i>
+                {"Name"}
+                </p>
               <EditableNameField
                 value={name}
                 setValue={setName}
@@ -125,7 +129,10 @@ export function ListItemDetailViewer({
               />
             </div>
             <div className="mb-3">
-              <p className="mb-1 fw-semibold">Icon</p>
+              <p className="mb-1 fw-semibold">
+                <i className="bi bi-image me-2"></i>
+                {"Icon"}
+              </p>
               <EditableIconField
                 icon={icon}
                 setIcon={setIcon}
@@ -134,7 +141,10 @@ export function ListItemDetailViewer({
               />
             </div>
             <div className="mb-3">
-              <p className="mb-1 fw-semibold">Quantity</p>
+              <p className="mb-1 fw-semibold">
+                <i className="bi bi-basket me-2"></i>
+                {"Quantity"}
+              </p>
               <EditableNumberField
                 value={quantity}
                 setValue={setQuantity}
@@ -143,11 +153,17 @@ export function ListItemDetailViewer({
               />
             </div>
             <div className="mb-3">
-              <p className="mb-1 fw-semibold">Category</p>
+              <p className="mb-1 fw-semibold">
+                <i className="bi bi-tags me-2"></i>
+                {"Category"}
+              </p>
               {categoryField}
             </div>
             <div className="mb-3">
-              <p className="mb-1 fw-semibold">Note</p>
+              <p className="mb-1 fw-semibold">
+                <i className="bi bi-journal-text me-2"></i>
+                {"Note"}
+              </p>
               <EditableNoteField
                 value={note}
                 setValue={setNote}
@@ -157,7 +173,8 @@ export function ListItemDetailViewer({
             </div>
             <div className="mt-3">
               <button className="btn btn-primary" onClick={onSaveClick}>
-                Save Changes
+                <i className="bi bi-save2 me-1"></i>
+                {"Save Changes"}
               </button>
             </div>
           </>

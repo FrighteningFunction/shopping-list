@@ -55,7 +55,8 @@ export function ShoppingContainer() {
         className="btn btn-primary mt-4"
         onClick={() => setIsAdding(true)}
       >
-        Add Item
+        <i className="bi bi-plus-lg me-2"></i>
+        {"Add Item"}
       </button>
     );
   }
@@ -63,7 +64,10 @@ export function ShoppingContainer() {
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h1 className="mb-4">Shopping List</h1>
+        <div className="d-flex flex-row align-items-baseline">
+          <i className="bi bi-cart4 me-3 fs-1"></i>
+          <h1 className="mb-4">Shopping List</h1>
+        </div>
         <WeatherBanner />
       </div>
       <SearchBar setFilter={setFilter} />
@@ -91,7 +95,10 @@ function ShoppingListFilterPanel({
   );
   return (
     <>
-      <h4 className="mb-4">Filter Options</h4>
+      <div className="d-flex flex-row align-items-baseline">
+        <i className="bi bi-funnel-fill me-1 fs-4"></i>
+        <h4 className="mb-4">Filter Options</h4>
+      </div>
       <div className="row mb-4 align-items-center justify-content-start">
         <div className="col-12 col-md-4 mb-3">
           <input

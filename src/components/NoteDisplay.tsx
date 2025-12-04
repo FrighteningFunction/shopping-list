@@ -15,7 +15,8 @@ export function NoteDisplay({ listItem }: { listItem: ListItem }) {
             data-bs-custom-class="custom-tooltip"
             data-bs-title={listItem.note}
           >
-            Peek Note
+            <i className="bi bi-eye me-1"></i>
+            {"Peek Note"}
           </button>
         ) : null
     )
